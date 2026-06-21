@@ -1,0 +1,55 @@
+{
+  "specification": "1. Go to 'https://vimeo.com/1084537'.\n    2. If a consent, cookie, or welcome dialog appears, dismiss it without signing in.\n    3. Make sure the video plays.\n    4. Wait for the video player page to finish loading.\n    5. If playback has not started, press the Play button.\n    6. Watch the video for 10 seconds, then stop.",
+  "states": [
+    {
+      "checks": [
+        {
+          "type": "always_true",
+          "params": {}
+        }
+      ],
+      "actions": [
+        {
+          "type": "go_to_url",
+          "params": {
+            "url": "https://vimeo.com/1084537",
+            "new_tab": false
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "button.chakra-button[aria-label=\"Close\"][type=\"button\"]"
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "button[type=\"button\"]"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "seconds": 10
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "button[type=\"button\"]"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "seconds": 10
+          }
+        }
+      ],
+      "end_state": "Workflow Completed",
+      "executed": []
+    }
+  ],
+  "parameters": []
+}

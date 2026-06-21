@@ -1,0 +1,43 @@
+{
+  "specification": "1. Go to 'https://news.google.com'.\n    2. Click 'For you' in the menu bar at the top.\n    3. Click the first article from the list.\n    4. Wait for the article page to finish loading, then stop.",
+  "states": [
+    {
+      "checks": [
+        {
+          "type": "always_true",
+          "params": {}
+        }
+      ],
+      "actions": [
+        {
+          "type": "go_to_url",
+          "params": {
+            "url": "https://news.google.com",
+            "new_tab": false
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "a.brSCsc[aria-label=\"For you\"][role=\"tab\"]"
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "button.VfPpkd-LgbsSe.ksBjEc[aria-label=\"No, thanks\"]"
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "a.WwrzSb[target=\"_blank\"]"
+          }
+        }
+      ],
+      "end_state": "Workflow Completed",
+      "executed": []
+    }
+  ],
+  "parameters": []
+}

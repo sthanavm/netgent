@@ -1,0 +1,43 @@
+{
+  "specification": "1. Go to 'https://www.wikipedia.org'.\n    2. Click the English option to enter the English version of Wikipedia.\n    3. Click the menu button (3 horizontal lines) in the top left corner.\n    4. Click 'Random article' from the menu.\n    5. Wait for the random article page to finish loading, then stop.",
+  "states": [
+    {
+      "checks": [
+        {
+          "type": "always_true",
+          "params": {}
+        }
+      ],
+      "actions": [
+        {
+          "type": "go_to_url",
+          "params": {
+            "url": "https://www.wikipedia.org",
+            "new_tab": false
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "a.link-box[id=\"js-link-box-en\"]"
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "input[aria-label=\"Main menu\"][role=\"button\"]"
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "a[href=\"/wiki/Special:Random\"]"
+          }
+        }
+      ],
+      "end_state": "Workflow Completed",
+      "executed": []
+    }
+  ],
+  "parameters": []
+}
