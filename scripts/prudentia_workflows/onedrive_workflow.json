@@ -1,0 +1,43 @@
+{
+  "specification": "1. Go to 'https://1drv.ms/u/c/4c706cc78a96c093/IQCJuNpl5kb1QJnzUaLxrJCUAdXerzosGllMTrOsSt7NkDw?e=IVJRjK'.\n    2. If a consent, cookie, or welcome dialog appears, dismiss it without signing in.\n    3. Click the download button to download the file.\n    4. Wait for the download to finish, then stop.",
+  "states": [
+    {
+      "checks": [
+        {
+          "type": "always_true",
+          "params": {}
+        }
+      ],
+      "actions": [
+        {
+          "type": "go_to_url",
+          "params": {
+            "url": "https://1drv.ms/u/c/4c706cc78a96c093/IQCJuNpl5kb1QJnzUaLxrJCUAdXerzosGllMTrOsSt7NkDw?e=IVJRjK",
+            "new_tab": false
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "seconds": 5
+          }
+        },
+        {
+          "type": "click_element",
+          "params": {
+            "selector": "button.od-Button.od-ButtonBarCommand"
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "seconds": 5
+          }
+        }
+      ],
+      "end_state": "Workflow Completed",
+      "executed": []
+    }
+  ],
+  "parameters": []
+}
