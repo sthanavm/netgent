@@ -21,12 +21,6 @@
           "params": {
             "seconds": 10
           }
-        },
-        {
-          "type": "click_element",
-          "params": {
-            "selector": "button.ytp-play-button.ytp-button[aria-label=\"Pause (k)\"]"
-          }
         }
       ],
       "end_state": "Workflow Completed",

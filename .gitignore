@@ -38,6 +38,7 @@ htmlcov/
 *.key
 credentials.json
 secrets.json
+api_keys.json
 
 # --- Editor / OS ---
 .vscode/

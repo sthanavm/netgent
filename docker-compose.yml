@@ -32,15 +32,12 @@ services:
       TIMEOUT: ${BROWSERLESS_TIMEOUT:-60000}
     restart: unless-stopped
     healthcheck:
-      # Browserless exposes `/sysinfo` on the same port; cheap probe
-      # that confirms the HTTP server is up before dependents start.
+      # Browserless v2 has no /sysinfo route; probe the root and treat
+      # any HTTP response (including 4xx) as healthy — only fail on
+      # network errors (wget exit 4) or crashes.
       test:
-        - "CMD"
-        - "wget"
-        - "-q"
-        - "-O"
-        - "/dev/null"
-        - "http://localhost:3000/sysinfo"
+        - "CMD-SHELL"
+        - "wget -q -O /dev/null http://localhost:3000/ || [ $? -eq 8 ]"
       interval: 30s
       timeout: 5s
       retries: 3

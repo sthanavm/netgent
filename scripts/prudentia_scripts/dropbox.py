@@ -41,10 +41,8 @@ def _write_workflow_artifact(generated: dict) -> None:
 async def main() -> None:
     load_dotenv(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".env"))
 
-    specification = """1. Go to 'https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=0'.
-    2. If a consent, cookie, or welcome dialog appears, dismiss it without signing in.
-    3. Click the download button to download the file.
-    4. Wait for the download to finish, then stop."""
+    specification = """1. Navigate directly to 'https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=1' to trigger the file download.
+    2. Wait for the download to complete, then stop."""
     parameters = {}
     client = NetGent(cdp_url=None, headless=False)
     generated = await client.generate(

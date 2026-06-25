@@ -295,6 +295,7 @@ async def open_browser_session(playwright: Playwright, *, record_har_path: str |
     context_kwargs: dict[str, Any] = {
         "permissions": ["camera", "microphone"],
         "viewport": {"width": 1280, "height": 720},
+        "accept_downloads": True,
     }
     if stealth:
         context_kwargs["user_agent"] = STEALTH_USER_AGENT

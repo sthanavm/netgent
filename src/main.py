@@ -202,7 +202,7 @@ class NetGent:
                         "--use-fake-device-for-media-stream",
                     ],
                 )
-                context = await browser.new_context()
+                context = await browser.new_context(accept_downloads=True)
 
             await context.grant_permissions(["camera", "microphone"])
 

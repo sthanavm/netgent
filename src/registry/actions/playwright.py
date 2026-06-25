@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import os
 from functools import wraps
 from pathlib import Path
 from typing import Any
@@ -224,6 +225,55 @@ async def _fallback_coordinate_click(
     )
 
 
+async def _navigate_and_capture_download(
+    page: Page, url: str
+) -> dict[str, Any] | None:
+    """Navigate to url; if a download is triggered, save it and return info.
+    Returns None if no download was triggered."""
+    loop = asyncio.get_event_loop()
+    download_future: asyncio.Future = loop.create_future()
+
+    def _on_download(download):
+        if not download_future.done():
+            download_future.set_result(download)
+
+    page.on("download", _on_download)
+    triggered = False
+    try:
+        await page.goto(url)
+    except PlaywrightError as exc:
+        if "Download is starting" not in str(exc):
+            page.remove_listener("download", _on_download)
+            raise
+        triggered = True
+    finally:
+        if not triggered:
+            page.remove_listener("download", _on_download)
+
+    if not triggered:
+        return None
+
+    try:
+        download = await asyncio.wait_for(
+            asyncio.shield(download_future), timeout=60.0
+        )
+        downloads_dir = os.path.expanduser(
+            os.getenv("NETGENT_DOWNLOADS_DIR", "~/Downloads")
+        )
+        os.makedirs(downloads_dir, exist_ok=True)
+        save_path = os.path.join(downloads_dir, download.suggested_filename)
+        await download.save_as(save_path)
+        return {
+            "downloaded": True,
+            "filename": download.suggested_filename,
+            "path": save_path,
+        }
+    except asyncio.TimeoutError:
+        return {"downloaded": False, "reason": "download timed out"}
+    finally:
+        page.remove_listener("download", _on_download)
+
+
 @action(name="go_to_url")
 @with_progress_screenshot
 async def go_to_url(
@@ -238,11 +288,11 @@ async def go_to_url(
             current_page = _require_page(ctx)
             browser_context = current_page.context
             page = await browser_context.new_page()
-            await page.goto(url)
+            dl = await _navigate_and_capture_download(page, url)
+            if dl:
+                return {"url": url, "new_tab": True, **dl}
             await _wait_after_action(page)
-
             page_id = browser_context.pages.index(page)
-
             return {
                 "url": page.url,
                 "new_tab": True,
@@ -251,7 +301,9 @@ async def go_to_url(
             }
 
         page = _resolve_page(ctx)
-        await page.goto(url)
+        dl = await _navigate_and_capture_download(page, url)
+        if dl:
+            return {"url": url, "new_tab": False, **dl}
         await _wait_after_action(page)
         return {
             "url": page.url,

@@ -31,7 +31,7 @@
         {
           "type": "click_element",
           "params": {
-            "selector": "a.WwrzSb[target=\"_blank\"]"
+            "selector": "a.svxzne"
           }
         }
       ],

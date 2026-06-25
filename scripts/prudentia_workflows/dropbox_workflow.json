@@ -1,5 +1,5 @@
 {
-  "specification": "1. Go to 'https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=0'.\n    2. If a consent, cookie, or welcome dialog appears, dismiss it without signing in.\n    3. Click the download button to download the file.\n    4. Wait for the download to finish, then stop.",
+  "specification": "1. Navigate directly to 'https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=1' to trigger the file download.\n    2. Wait for the download to complete, then stop.",
   "states": [
     {
       "checks": [
@@ -12,26 +12,20 @@
         {
           "type": "go_to_url",
           "params": {
-            "url": "https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=0",
+            "url": "https://www.dropbox.com/scl/fi/jzhlodhy7uws2q5wx773e/test.dat?rlkey=zf989dn36hdmqhknaf3ac64f4&st=ovuvw078&dl=1",
             "new_tab": false
           }
         },
         {
-          "type": "click_element",
+          "type": "wait",
           "params": {
-            "selector": "button.dig-Button.dig-u1jsn63_24-3-0"
+            "seconds": 10
           }
         },
         {
-          "type": "click_element",
+          "type": "wait",
           "params": {
-            "selector": "button.dig-Button.dig-u1jsn63_24-3-0"
-          }
-        },
-        {
-          "type": "click_element",
-          "params": {
-            "selector": "button.dig-Button.dig-u1jsn63_24-3-0"
+            "seconds": 5
           }
         }
       ],

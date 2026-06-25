@@ -1,5 +1,5 @@
 {
-  "specification": "1. Go to 'https://drive.google.com'.\n    2. Open the file at 'https://drive.google.com/file/d/1CJgWf55gKC-CC1CmHJLUvHOzaZPFt5Qn/view?usp=sharing'.\n    3. Download the file using the download button or the menu.\n    4. Wait for the download to finish, then stop.",
+  "specification": "1. Navigate directly to 'https://drive.google.com/uc?export=download&id=1CJgWf55gKC-CC1CmHJLUvHOzaZPFt5Qn' to trigger the file download.\n    2. Wait for the download to complete, then stop.",
   "states": [
     {
       "checks": [
@@ -12,20 +12,20 @@
         {
           "type": "go_to_url",
           "params": {
-            "url": "https://drive.google.com/file/d/1CJgWf55gKC-CC1CmHJLUvHOzaZPFt5Qn/view?usp=sharing",
+            "url": "https://drive.google.com/uc?export=download&id=1CJgWf55gKC-CC1CmHJLUvHOzaZPFt5Qn",
             "new_tab": false
-          }
-        },
-        {
-          "type": "click_element",
-          "params": {
-            "selector": "div.ndfHFb-c4YZDc-LgbsSe[aria-label=\"Download\"][role=\"button\"]"
           }
         },
         {
           "type": "wait",
           "params": {
             "seconds": 10
+          }
+        },
+        {
+          "type": "wait",
+          "params": {
+            "seconds": 5
           }
         }
       ],
